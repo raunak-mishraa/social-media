@@ -13,7 +13,7 @@ export const signUpSchema = z.object({
 export type SignUpValues = z.infer<typeof signUpSchema>
 
 export const loginSchema = z.object({
-    email: requiredString.email('Invalid email'),
+    username: requiredString,
     password: requiredString.min(8, 'Must be at least 8 characters'),
 })
 
