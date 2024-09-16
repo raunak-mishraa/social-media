@@ -1,14 +1,15 @@
 "use server";
+
 import { lucia } from "@/auth";
 import prisma from "@/lib/prisma";
 import { signUpSchema, SignUpValues } from "@/lib/validation";
-import { hash } from '@node-rs/argon2'
+import { hash } from "@node-rs/argon2";
 import { generateIdFromEntropySize } from "lucia";
 import { isRedirectError } from "next/dist/client/components/redirect";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function SignUp(
+export async function signUp(
     credentials: SignUpValues
 ): Promise<{error: string}>{
     try{
@@ -71,6 +72,6 @@ export async function SignUp(
     catch(error){
         if(isRedirectError(error)) throw error;
         console.error(error)
-        return {error: 'error.message'}
+        return {error: 'Sign up failed'}
     }
 }

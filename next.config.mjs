@@ -1,11 +1,28 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: {
-        staleTimes: {
-            dynamic: 30,// 30 seconds, the client side cache will be invalidated after 30 seconds
-        }
+      staleTimes: {
+        dynamic: 30,
+      },
+      serverComponentsExternalPackages: ["@node-rs/argon2"],
     },
-    serverExternalPackages: ['@node-rs/argon2'],
-};
-
-export default nextConfig;
+    images: {
+      remotePatterns: [
+        {
+          protocol: "https",
+          hostname: "utfs.io",
+          pathname: `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/*`,
+        },
+      ],
+    },
+    rewrites: () => {
+      return [
+        {
+          source: "/hashtag/:tag",
+          destination: "/search?q=%23:tag",
+        },
+      ];
+    },
+  };
+  
+  export default nextConfig;
