@@ -1,23 +1,17 @@
 import PostEditor from "@/components/posts/editor/PostEditor";
 import Post from "@/components/posts/Post";
+import TrendsSidebar from "@/components/TrendsSidebar";
 import prisma from "@/lib/prisma";
+import { postDataInclude } from "@/lib/types";
 import Image from "next/image";
 
 export default async function Home() {
   const posts = await prisma.post.findMany({
-    include: {//include the user object in the post object, prisma way to join tables
-      user: {
-        select: {
-            username: true,
-            displayName: true,
-            avatarUrl: true,
-        },
-      }
-    },
+    include: postDataInclude,//include the user object in the post object, prisma way to join tables
     orderBy: {createdAt: "desc"},
   });
   return (
-    <main className="h-[200vh] w-full">
+    <main className="w-full min-w-0 flex gap-5">
       <div className="w-full min-w-0 space-y-5">
       <PostEditor />
       {posts.map((post) => (
@@ -25,6 +19,7 @@ export default async function Home() {
       )
       )}
       </div>
+      <TrendsSidebar/>
     </main>
   );
 }
