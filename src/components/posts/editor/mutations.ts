@@ -57,8 +57,7 @@ export function useSubmitPostMutation() {
       queryClient.invalidateQueries({
         queryKey: queryFilter.queryKey,
         predicate(query) {
-          return !query.state.data;
-          // return queryFilter.predicate(query) && !query.state.data;
+          return queryFilter.predicate(query) && !query.state.data;
         },
       });
 

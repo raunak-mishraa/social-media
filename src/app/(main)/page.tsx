@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 import { postDataInclude } from "@/lib/types";
 import Image from "next/image";
 import ForYouFeed from "./ForYouFeed";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FollowingFeed from "./FollowingFeed";
 
 export default function Home() {
